@@ -9,14 +9,11 @@ import { Suspense } from "react";
 const Contacts = async ({
   searchParams,
 }: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-  };
+  searchParams: Promise<{ query?: string; page?: string }>;
 }) => {
-  const awaitedSearchParams = await searchParams;
-  const query = awaitedSearchParams?.query || "";
-  const currentPage = Number(awaitedSearchParams?.page) || 1;
+  const awaitedSearchParams = await searchParams; // Menunggu searchParams sebelum digunakan
+  const query = awaitedSearchParams.query || "";
+  const currentPage = Number(awaitedSearchParams.page) || 1;
 
   const totalPages = await getContactPages(query);
 
@@ -30,7 +27,7 @@ const Contacts = async ({
         <ContactTable query={query} currentPage={currentPage} />
       </Suspense>
       <div className="flex justify-center mt-4">
-        <Pagination totalPages={totalPages}></Pagination>
+        <Pagination totalPages={totalPages} />
       </div>
     </div>
   );
