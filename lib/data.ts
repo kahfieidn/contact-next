@@ -4,8 +4,9 @@ const ITEMS_PER_PAGE = 7;
 
 export const getContacts = async (query: string, currentPage: number) => {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
   try {
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const contacts = await prisma.contact.findMany({
         skip: offset,
         take: ITEMS_PER_PAGE,
