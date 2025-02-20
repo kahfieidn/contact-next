@@ -1,6 +1,6 @@
 import { getContacts } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
-import { EditButton } from "@/components/buttons";
+import { EditButton, DeleteButton } from "@/components/buttons";
 
 const ContactTable = async ({
   query,
@@ -9,7 +9,7 @@ const ContactTable = async ({
   query: string;
   currentPage: number;
 }) => {
-
+  
   const contacts = await getContacts(query, currentPage);
 
   return (
@@ -34,7 +34,7 @@ const ContactTable = async ({
             </td>
             <td className="flex justify-center gap-1 py-3">
               <EditButton id={contacts.id}></EditButton>
-              {/* <DeleteButton id={contacts.id}></DeleteButton> */}
+              <DeleteButton id={contacts.id}></DeleteButton>
             </td>
           </tr>
         ))}

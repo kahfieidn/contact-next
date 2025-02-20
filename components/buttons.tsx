@@ -29,16 +29,19 @@ export const EditButton = ({ id }: { id: string }) => {
   );
 };
 
-// export const DeleteButton = ({ id }: { id: string }) => {
-//   const DeleteContactWithId = deleteContact.bind(null, id);
-//   return (
-//     <form action={DeleteContactWithId}>
-//       <button className="rounded-sm border p-1 hover:bg-gray-100">
-//         <IoTrashOutline size={20}></IoTrashOutline>
-//       </button>
-//     </form>
-//   );
-// };
+export const DeleteButton = ({ id }: { id: string }) => {
+  const handleDelete = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await deleteContact(id);
+  };
+  return (
+    <form onSubmit={handleDelete}>
+      <button className="rounded-sm border p-1 hover:bg-gray-100">
+        <IoTrashOutline size={20}></IoTrashOutline>
+      </button>
+    </form>
+  );
+};
 
 export const SubmitButton = ({ label }: { label: string }) => {
   const { pending } = useFormStatus();
